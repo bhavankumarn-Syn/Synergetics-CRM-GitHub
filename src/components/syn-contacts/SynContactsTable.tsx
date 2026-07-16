@@ -8,6 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import {
+  EyeIcon,
+  EyeCloseIcon
+} from "../../icons/index";
 
 import Badge from "../ui/badge/Badge";
 import Image from "next/image";
@@ -59,6 +63,10 @@ const SynContactsTable = () => {
         }
     }
 
+    const viewRecords = (data:any)=>{
+        console.log('Data',  data)
+    }
+
     useEffect(() => {
         fetchOrders(page, limit);
     }, [page, limit]);
@@ -71,51 +79,50 @@ const SynContactsTable = () => {
             <div className="min-w-[1102px]">
             <Table>
                 {/* Table Header */}
-                <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
+                <TableHeader className="border-b border-blue-100 dark:border-white/[0.05]">
                 <TableRow>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Name
-                    
                     
                     </TableCell>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Email
                     </TableCell>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Form
                     </TableCell>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Organization
                     </TableCell>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Phone
                     </TableCell>
                     <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
                     Date
                     </TableCell>
                      <TableCell
                     isHeader
-                    className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                    className="px-5 py-3 font-bold text-blue-500 text-start text-theme-xs dark:text-gray-400"
                     >
-                    Description
+                    Description 
                     </TableCell>
                 </TableRow>
                 </TableHeader>
@@ -154,7 +161,8 @@ const SynContactsTable = () => {
                         {dayjs(lead.createdAt).format("YYYY-MM-DD")}
                     </TableCell>
                     <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                        {lead.brief}
+                        {/* {lead.brief} */}
+                       <span onClick={()=>viewRecords(lead)}> <EyeIcon/> </span>
                     </TableCell>
                     </TableRow>
                 ))}
