@@ -20,6 +20,7 @@ import Pagination from "../tables/Pagination";
 import { useModal } from "../../hooks/useModal";
 import { Modal } from "../ui/modal";
 import Label from "../form/Label";
+import Select from "../form/Select";
 
 
 
@@ -41,8 +42,9 @@ const SynContactsTable = () => {
     const [loading, setLoading] = useState(false);
     const [leads, setLeads] = useState<Contacts[]>([]);
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(3);
     const [totalPages, setTotalPages] = useState(0);
+    const [filter, setFilter] = useState<string>('');
 
     const { isOpen, openModal, closeModal } = useModal();
     const [viewLead, setViewLead] = useState({
@@ -54,18 +56,18 @@ const SynContactsTable = () => {
         brief: '',
         leadType: '', 
     })
-    const handleSave = () => {
-        // Handle save logic here
-        console.log("Saving changes...");
-        closeModal();
-    };
+    const filterOptions = [
+      {'label' : 'All', 'value' : 'ALL'},
+      {'label' : 'Spam', 'value' : 'SPAM'},
+      {'label' : 'Valid', 'value' : 'VALID'}
+    ]
 
-    const fetchOrders = async (page: number, limit: number) => {
+    const fetchOrders = async (page: number, limit: number, leadType?: string) => {
         try {
             setLoading(true);
         // const response = await fetch('/api/appuser');
         const token = localStorage.getItem('token');
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/forms/syn/contact/all?page=${page}&limit=${limit}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/api/forms/syn/contact/all?page=${page}&limit=${limit}&leadType=${leadType}`, {
             method: "GET",
             headers: {
             "Content-Type": "application/json",
@@ -99,15 +101,40 @@ const SynContactsTable = () => {
         })
         openModal()
     }
+    const handleFilterChange = (value: string) => {
+      console.log("Selected value:", value);
+      setFilter(value)
+      fetchOrders(1, limit, value);
+      setPage(1)
+      // setLimit(10)
+    };
 
     useEffect(() => {
-        fetchOrders(page, limit);
+        fetchOrders(page, limit, filter);
     }, [page, limit]);
   
 
   return (
-    <>
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+    <>  
+        <div className="relative p-0 m-0">
+          <div className=" absolute top-[-75px] right-0 text-amber-300"> 
+              <div className="grid grid-cols-1 gap-x-6 gap-y-3 lg:grid-cols-2">
+                <div className="flex items-center justify-end">
+                  <Label className="text-orange-400 mb-0 ">Filter</Label> 
+                </div>
+                <div>
+                  <Select 
+                    options={filterOptions} 
+                    onChange={handleFilterChange}
+                    defaultValue={"ALL"}
+                  />
+                 
+                </div>
+              </div>
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03] relative">
+        
         <div className="max-w-full overflow-x-auto">
             {loading ? (
                 <div className="flex justify-center items-center py-10">
