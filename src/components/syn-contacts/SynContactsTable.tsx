@@ -42,7 +42,7 @@ const SynContactsTable = () => {
     const [loading, setLoading] = useState(false);
     const [leads, setLeads] = useState<Contacts[]>([]);
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(3);
+    const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const [filter, setFilter] = useState<string>('');
 
