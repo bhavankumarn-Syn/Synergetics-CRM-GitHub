@@ -319,7 +319,7 @@ const AppSidebar: React.FC = () => {
               />
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/images/syn_logo.png"
                 alt="Logo"
                 width={150}
                 height={40}
