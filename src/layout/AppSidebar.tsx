@@ -32,6 +32,11 @@ const navItems: NavItem[] = [
     subItems: [{ name: "Contact Leads", path: "/", pro: false }],
   },
   {
+    icon: <GridIcon />,
+    name: "Clinitraq",
+    subItems: [{ name: "Clinitraq Leads", path: "/clinitraq-leads", pro: false }],
+  },
+  {
     icon: <UserCircleIcon />,
     name: "Users",
     path: "/users",
