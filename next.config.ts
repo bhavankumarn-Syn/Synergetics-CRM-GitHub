@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
 
     env: {
       // NEXT_PUBLIC_BACKEND_API: "http://localhost:4000",
-      NEXT_PUBLIC_BACKEND_API: "https://contact-form-github-production.up.railway.app",
+      NEXT_PUBLIC_BACKEND_API: "https://leads-api.synergetics.ai",
       NEXT_PUBLIC_TEST: "bhavan",
       NEXT_PUBLIC_RECAPTCHA_SITE_KEY: "6LeDl0ctAAAAAC6gSMee3fRoFrBgZM43qYUmqGQw",
     },
